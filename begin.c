@@ -11,13 +11,11 @@
 */
 
 #include "pipes.h"
+#include "begin.h"
 
 void errorprint(char* );
 
 void main(int argc, char *argv[]){
-	int n_grid,i,j;
-    long ik;
-    double size_grid, lambda;
 
 	/* Processing the command line argument  */
 

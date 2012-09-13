@@ -24,7 +24,6 @@ extern void setmode(int,int);
 void newfield(int, double, double, int, int ,int, double, double, double);
 void write_field();
 void read_field();
-void begin(int, char*);
 double phase(double, double);
 
 /* The structure FIELD contains the characteristics
@@ -194,31 +193,6 @@ void newfield(int number, double size, double lambda,\
 			exit(1);}
 }
 
-void begin(int argc, char* argv[]){
-    /* reading the data from a command line */
-	int n_grid,i,j;
-    long ik;
-    double size_grid, lambda;
-
-    sscanf(argv[1],"%le",&size_grid);
-    sscanf(argv[2],"%le",&lambda);
-    n_grid=256;
-    if(argc>3) 
-		sscanf(argv[3],"%d",&n_grid);
-	
-	newfield(n_grid, size_grid, lambda,0,0,0,0.,0.,0.);
-
-    /*  Here the initial field is formed   */
-    ik=0;
-    for (i=1; i<=field.number ; i++)
-		for (j=1; j<=field.number ; j++){
-			field.real[ik]=1.;
-			field.imaginary[ik]=0.;
-			ik++;
-		}
-
-    write_field(); 
-}
 double phase(double y, double x)
 {    double pp=0.; 
      if(x==0.){
