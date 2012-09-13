@@ -11,7 +11,6 @@
 */
 
 #include "pipes.h"
-//#include "begin.h"
 
 void errorprint();
 
@@ -25,9 +24,9 @@ void main(int argc, char *argv[]){
     if (argc < 3 || argc >4) {
 		errorprint(argv[0]);
     }
-	begin(argc, argv);
 
-	 /*    return (0);
+	begin(argc, argv); 
+    /*    return (0);
 			*/
 }
 
