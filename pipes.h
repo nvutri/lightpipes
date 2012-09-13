@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h> 
+#include <crtdefs.h>
+#include <sal.h>
 
 #ifdef _DJGPP_
 #include <fcntl.h>
@@ -21,10 +23,11 @@
 extern void setmode(int,int);
 #endif
 
-__declspec(dllexport) void newfield(int, double, double, int, int ,int, double, double, double);
-__declspec(dllexport) void write_field();
-__declspec(dllexport) void read_field();
-__declspec(dllexport) double phase(double, double);
+void newfield(int, double, double, int, int ,int, double, double, double);
+void write_field();
+void read_field();
+void begin(int, char*);
+double phase(double, double);
 
 /* The structure FIELD contains the characteristics
 of the light beam: number of points along the side 
@@ -44,7 +47,7 @@ FIELD field;
 
 char* pass_string, p_pass[10]; 
 
-__declspec(dllexport) void read_field()
+void read_field()
 /* program read_field reads the FIELD from the standard input */
 {
 	unsigned long  size;
@@ -110,7 +113,7 @@ __declspec(dllexport) void read_field()
 
 }
 
-__declspec(dllexport) void write_field()
+void write_field()
 /* program write_field writes field to the standard output */
 {
     unsigned long  size;
@@ -171,7 +174,7 @@ __declspec(dllexport) void write_field()
 }
 
 /* newfield allocates memory */
-__declspec(dllexport) void newfield(int number, double size, double lambda,\
+void newfield(int number, double size, double lambda,\
 			  int int1, int int2, int int3,\
 			  double doub1, double doub2, double doub3){
     field.number=number;
@@ -193,7 +196,32 @@ __declspec(dllexport) void newfield(int number, double size, double lambda,\
 			exit(1);}
 }
 
-__declspec(dllexport) double phase(double y, double x)
+void begin(int argc, char* argv[]){
+    /* reading the data from a command line */
+	int n_grid,i,j;
+    long ik;
+    double size_grid, lambda;
+
+    sscanf(argv[1],"%le",&size_grid);
+    sscanf(argv[2],"%le",&lambda);
+    n_grid=256;
+    if(argc>3) 
+		sscanf(argv[3],"%d",&n_grid);
+	
+	newfield(n_grid, size_grid, lambda,0,0,0,0.,0.,0.);
+
+    /*  Here the initial field is formed   */
+    ik=0;
+    for (i=1; i<=field.number ; i++)
+		for (j=1; j<=field.number ; j++){
+			field.real[ik]=1.;
+			field.imaginary[ik]=0.;
+			ik++;
+		}
+
+    write_field(); 
+}
+double phase(double y, double x)
 {    double pp=0.; 
      if(x==0.){
        if (y>0) pp= 0.5*Pi;
