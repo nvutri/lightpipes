@@ -12,7 +12,7 @@
 
 #include "pipes.h"
 
-void errorprint();
+void errorprint(char* );
 
 void main(int argc, char *argv[]){
 	int n_grid,i,j;
@@ -31,7 +31,7 @@ void main(int argc, char *argv[]){
 }
 
 //Printing error message
-void errorprint(char *arr){
+void errorprint(char* arr){
     fprintf(stderr,"\n%s forms the initial data structure for use \
 by all following programs\n", arr);
     fprintf(stderr,"\nUSAGE: begin B C [A],  where:                       \n\n");

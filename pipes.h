@@ -9,8 +9,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h> 
-#include <crtdefs.h>
-#include <sal.h>
 
 #ifdef _DJGPP_
 #include <fcntl.h>
