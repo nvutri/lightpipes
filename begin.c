@@ -11,7 +11,6 @@
 */
 
 #include "pipes.h"
-#include "begin.h"
 
 void errorprint(char* );
 
