@@ -1,1 +1,5 @@
 *.exe
+manual
+scr_dos
+scripts
+*.dll
