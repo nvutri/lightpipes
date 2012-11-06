@@ -2,4 +2,8 @@
 manual
 scr_dos
 scripts
+#Exclude DLL Library for now
 *.dll
+#picture files
+*.pgm
+*.ps
