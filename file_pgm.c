@@ -5,7 +5,6 @@
 /*                                                              */
 /*--------------------------------------------------------------*/
 
-
 #include "pipes.h"
 #include <math.h>
 #include <stdio.h>
@@ -19,13 +18,18 @@ N: grid_size from *field
 G: @param double gamma
 MAX: @param int max_val
 */
-__declspec(dllexport) void file_pgm(double gamma, int max_val, FIELD* field){
-
+__declspec(dllexport) void file_pgm(FIELD* field, const char* path, double gamma, int max_val){
+	FILE* fr;
 	/*Varible declaration*/
 	int i,j,ii,jj, istep,i0, i_i;
 	int imax;
 	long ik1;
 	float max_int=0;
+
+	//Open the file
+	if (( fr = fopen(path,"wb")) == NULL) {
+		fprintf(stderr,"error opening file %s, exiting \n", path);
+	}
 
 	//Initialization
 	imax = field->n_grid;
@@ -38,14 +42,14 @@ __declspec(dllexport) void file_pgm(double gamma, int max_val, FIELD* field){
 	*/
 
 	istep=1;
-	setmode(fileno(stderr), O_BINARY);
-	/*    fprintf(stderr,"%d\n", istep); */
+	//setmode(fileno(fr), O_BINARY);
+	/*    fprintf(fr,"%d\n", istep); */
 	//Header Information
-	fprintf(stderr,"P2\n");
-	fprintf(stderr,"#Creator: LightPipes (C) 1993-1996, Gleb Vdovin\n");
-	fprintf(stderr,"%d %d\n", imax, imax);
-	fprintf(stderr,"%d\n", max_val);
-	fflush(stderr);
+	fprintf(fr,"P2\n");
+	fprintf(fr,"#Creator: LightPipes (C) 1993-1996, Gleb Vdovin\n");
+	fprintf(fr,"%d %d\n", imax, imax);
+	fprintf(fr,"%d\n", max_val);
+
 	if( istep != 1){
 
 		for (i=1 ; i<= field->n_grid-istep; i +=  istep){
@@ -76,14 +80,13 @@ __declspec(dllexport) void file_pgm(double gamma, int max_val, FIELD* field){
 					sum=sum/(istep*istep);
 					i0=(int) floor(pow((sum/max_int),1./(gamma+0.0001))*max_val);
 					/* i0=(int)  (sum/max_int)*255;*/
-					fprintf(stderr,"%d ", i0);
+					fprintf(fr,"%d ", i0);
 					i_i++;
 					if (i_i == 40){
-						fprintf(stderr,"\n");
+						fprintf(fr,"\n");
 						i_i=1;
 					}
 			}
-			fflush(stderr);
 		}
 	}
 	else{
@@ -103,40 +106,25 @@ __declspec(dllexport) void file_pgm(double gamma, int max_val, FIELD* field){
 				ik1=(i-1)*field->n_grid +j- 1;
 				sum = field->real[ik1] *field->real[ik1]+ field->imaginary[ik1] * (field->imaginary[ik1]);
 				i0=(int) floor(pow((sum/max_int),1./(gamma+0.00001))*max_val);
-				fprintf(stderr,"%d ", i0);
+				fprintf(fr,"%d ", i0);
 				i_i++;
 				if (i_i == 40){
-					fprintf(stderr,"\n");
+					fprintf(fr,"\n");
 					i_i=1;
 				}
 			}
-			fflush(stderr);
 		}
 	}
-	fflush(stderr);
+	fclose(fr);
 }
 /*
 _TCHAR szBuffer[100];
 _stprintf(szBuffer, _T("begin %d"), field->n_grid);
 MessageBox(NULL, szBuffer, _T("wat"), MB_OK);
 if ((field->real == NULL) || (field->imaginary == NULL)) {
-fprintf(stderr,"NULL Pointers Error");
+fprintf(fr,"NULL Pointers Error");
 _stprintf(szBuffer, _T("NULL Pointers Error" ));
 MessageBox(NULL, szBuffer, _T("wat"), MB_OK);
-fflush(stderr);
+fflush(fr);
 }
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-

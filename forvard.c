@@ -4,55 +4,113 @@
 /*      Send bug reports to gleb@okotech.com                    */
 /*                                                              */
 /*--------------------------------------------------------------*/
-    
+
 #include <math.h>
 #include "pipes.h"
-#include "fftn.h"
 #undef REAL
 #define REAL double
 
-void fft3();
-int fftn ();
+/**
+Propagates the field to distance Z [units you use] using FFT algorithm
+USAGE: forvard Z, where  Z is the distance to propagate
+*/
+__declspec(dllexport) void forvard(FIELD* field, double distance){ 
+	int i,j, ii, ij, n12;
+	long ik, ir;
+	double z,z1,cc;
+	double sw, sw1, bus, abus, pi2, cab, sab;
+	double zz = distance;
 
-void main(int argc, char *argv[]){
-    void error_print();
-    void forvard();
+	pi2=2.*3.141592654;
+	z=fabs(zz);
 
-    double z;
+	ik=0;
+	ii=ij=1;
+	for (i=1;i<=field->n_grid; i++){
+		for (j=1;j<=field->n_grid; j++){
+			field->real[ik] = field->real[ik]*ii*ij;
+			field->imaginary[ik] =field->imaginary[ik]*ii*ij; 
+			ik++;
+			ij=-ij;
+		}
+		ii=-ii;
+	}
 
-    /* Processing the command line argument  */
-    if (argc!=2){
-        error_print(argv[0]);
-        exit(1);
-    }
-    /* reading the data from a command line */
-    sscanf(argv[1],"%le",&z);
-    read_field();
-    if (field.double1 !=0.) {
-        fprintf(stderr,"Forvard can not be applied in spherical\
- coordinates,\nuse CONVERT first\n");
-        exit(1);
-    }
+	if(zz>=0.) 
+		fft3(field, 1);
+	else 
+		fft3(field, -1);
 
-    forvard(z); 
+	/*
+	Spatial filter, (c)  Gleb Vdovin  1986:  
+	*/ 
+	if(zz >= 0.){
+		z1=z*field->lambda/2.;
+		n12=field->n_grid/2;
+		ik=0;
+		for (i=1;i<=field->n_grid; i++){
+			for (j=1;j<=field->n_grid; j++){ 
+				sw=((i-n12-1)/field->size);
+				sw *= sw;
+				sw1=((j-n12-1)/field->size);
+				sw1 *= sw1;
+				sw += sw1; 
+				bus=z1*sw;
+				ir = (long) bus;
+				/*	    if (ir > 1e8) fprintf(stderr,"%ld\n",ir);  */
+				abus=pi2*(ir- bus);
 
+				cab=cos(abus);
+				sab=sin(abus);
+				cc=field->real[ik]*cab-field->imaginary[ik]*sab;
+				field->imaginary[ik]=field->real[ik]*sab+field->imaginary[ik]*cab;
+				field->real[ik]=cc;
+				ik++;
+			}
+		}
+	}
+	else { 
+		z1=z*field->lambda/2.;
+		n12=field->n_grid/2;
+		ik=0;
+		for (i=1;i<=field->n_grid; i++){
+			for (j=1;j<=field->n_grid; j++){ 
+				sw=((i-n12-1)/field->size);
+				sw *= sw;
+				sw1=((j-n12-1)/field->size);
+				sw1 *= sw1;
+				sw += sw1; 
+				bus=z1*sw;
+				ir = (long) bus;
+				/*	    if (ir > 1e8) fprintf(stderr,"%ld\n",ir);  */
+				abus=pi2*(ir- bus);
 
+				cab=cos(abus);
+				sab=sin(abus);
+				cc=field->real[ik]*cab + field->imaginary[ik]*sab;
+				field->imaginary[ik]= field->imaginary[ik]*cab-field->real[ik]*sab;
+				field->real[ik]=cc;
+				ik++;
+			}
+		}
 
+	}
 
-    write_field();
+	if(zz >= 0.) 
+		fft3(field, -1);
+	else 
+		fft3(field, 1);   
 
+	ik=0;
+	ii=ij=1;
+	for (i=1;i<=field->n_grid; i++){
+		for (j=1;j<=field->n_grid; j++){
+			field->real[ik] = field->real[ik]*ii*ij;
+			field->imaginary[ik] =field->imaginary[ik]*ii*ij;
 
+			ik++;
+			ij=-ij;
+		}
+		ii=-ii;
+	}
 }
-
-void error_print(char *arr)
-{
-    fprintf(stderr,"\n%s propagates the field to \
-distance Z [units you use]\n\
-using FFT algorithm",arr);
-    fprintf(stderr,"\nUSAGE:  ");
-    fprintf(stderr,"%s Z, where  Z is the distance to propagate\n\n",arr);
-
-}
-
-
-#include "fft_prop.c"
