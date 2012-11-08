@@ -6,9 +6,7 @@
 /*--------------------------------------------------------------*/
 
 #include "pipes.h"
-#include <math.h>
 #include <stdio.h>
-
 
 /**
 Writes intensity distribution into file F
@@ -25,7 +23,7 @@ __declspec(dllexport) void file_int(FIELD* field, const char* path, int number_o
 	double dx,dx2;
 	long ik1;
 	int imax = 64;
-
+	//Open the file
 	if (( fr = fopen(path,"wb")) == NULL) {
 		fprintf(stderr,"error opening file %s, exiting \n", path);
 	}
@@ -37,14 +35,14 @@ __declspec(dllexport) void file_int(FIELD* field, const char* path, int number_o
 	dx2	=	dx * dx;
 
 	istep=1;
+
 	if (imax > field->n_grid)
 		imax = field->n_grid;
 	if ( (field->n_grid / imax) >1) {
 		istep	=	field->n_grid/imax;
 		imax	=	field->n_grid/istep;
 	}
-
-	/* writing the intensity     */
+	/* writing the intensity */
 
 	for (i=1; i <= field->n_grid; i += istep){
 		for (j=1; j <= field->n_grid; j += istep){ 
@@ -52,11 +50,11 @@ __declspec(dllexport) void file_int(FIELD* field, const char* path, int number_o
 			sum	=	0;
 			ik1	=	(i-1)*field->n_grid + j - 1; 
 			sum += field->real[ik1]			* field->real[ik1] 
-			+  field->imaginary[ik1]	* field->imaginary[ik1];
-			fprintf(fr, "%0.3f\n", sum );
+				+  field->imaginary[ik1]	* field->imaginary[ik1];
+			fprintf(fr, "%0.3f ", sum );
 		}
 		fprintf(fr, "\n");
 	}
-
+	//Close the file
 	fclose(fr);
 }
