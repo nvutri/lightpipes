@@ -13,6 +13,7 @@
 		<Item Name="circ_app &amp;&amp; lens_forvard.vi" Type="VI" URL="../circ_app &amp;&amp; lens_forvard.vi"/>
 		<Item Name="file_pgm_app.vi" Type="VI" URL="../file_pgm_app.vi"/>
 		<Item Name="filter_app.vi" Type="VI" URL="../filter_app.vi"/>
+		<Item Name="begin &amp;&amp; file_int.vi" Type="VI" URL="../begin &amp;&amp; file_int.vi"/>
 	</Item>
 	<Item Name="Gergberg Saxton" Type="Folder">
 		<Item Name="get_path.vi" Type="VI" URL="../get_path.vi"/>
@@ -31,12 +32,12 @@
 	<Item Name="convert.vi" Type="VI" URL="../VIs/convert.vi"/>
 	<Item Name="fil ter.vi" Type="VI" URL="../VIs/fil ter.vi"/>
 	<Item Name="file pgm.vi" Type="VI" URL="../VIs/file pgm.vi"/>
-	<Item Name="file int.vi" Type="VI" URL="../VIs/file int.vi"/>
 	<Item Name="file pha.vi" Type="VI" URL="../VIs/file pha.vi"/>
 	<Item Name="file ps.vi" Type="VI" URL="../VIs/file ps.vi"/>
 	<Item Name="forvard.vi" Type="VI" URL="../VIs/forvard.vi"/>
 	<Item Name="lens forvard.vi" Type="VI" URL="../VIs/lens forvard.vi"/>
 	<Item Name="Zer.vi" Type="VI" URL="../VIs/Zer.vi"/>
-	<Item Name="LightPipes.dll" Type="Document" URL="../LightPipes.dll"/>
 	<Item Name="lens.vi" Type="VI" URL="../VIs/lens.vi"/>
+	<Item Name="LightPipes.dll" Type="Document" URL="../../../../Debug/LightPipes.dll"/>
+	<Item Name="file int.vi" Type="VI" URL="../VIs/file int.vi"/>
 </Library>

@@ -7,3 +7,4 @@ scripts
 #picture files
 *.pgm
 *.ps
+images/

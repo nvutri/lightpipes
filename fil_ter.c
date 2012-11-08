@@ -48,14 +48,16 @@ __declspec(dllexport) void fil_ter(FIELD* field, const char* path, const char* c
 
 	read_line(fr, line);
 	// Only read PGM file
-	if((strstr(line, "P2")) != NULL)
+	if((strstr(line, "P2")) != NULL){
+		fprintf(stderr,"Portable ASCII graymap detected \n"); 
 		bin_ind = 0;
+	}
 	else if (strstr(line, "P5") != NULL) {
+		fprintf(stderr,"Portable binary graymap detected \n"); 
 		bin_ind = 1;
 	}
 	else {
 		fprintf(stderr,"NOT PGM Format");
-		return;
 	}
 
 	/* Read header */
@@ -117,11 +119,11 @@ void read_line(FILE* fr, char* line){
 			++i;
 		}
 	}
-
 }
 
-/* Fill in the sum array
-Find the smax value
+/**
+* Fill in the sum array
+* Find the smax value
 */
 double find_sum_smax(FILE *fr, FIELD* field, double *sum, const int bin_ind){
 	double fi;
@@ -136,23 +138,25 @@ double find_sum_smax(FILE *fr, FIELD* field, double *sum, const int bin_ind){
 					fprintf(stderr,"Error reading portable bitmap\n");
 					return;
 				}
-				sum[ik]= (double) b_in;
+				sum[ik] = (double) b_in;
 			}
 			else{
 				if ((fscanf(fr,"%le",&fi))==EOF){
 					fprintf(stderr,"fil_ter int subst: end of input file reached, exiting\n");
 					return;
 				}
-				sum[ik]=fi;
+				sum[ik] = fi;
 			}
+			if(smax < sum[ik]) 
+				smax=sum[ik];
 			++ik;
 		}
 	}
 	return smax;
 }
 
-/*
-int subst helper function
+/**
+* int subst helper function
 */
 
 void int_subst(FIELD* field, const double* sum, const double smax){
@@ -172,8 +176,8 @@ void int_subst(FIELD* field, const double* sum, const double smax){
 	}	
 }
 
-/*
-int mult helper function
+/**
+* int mult helper function
 */
 
 void int_mult(FIELD* field, const double* sum, const double smax){
@@ -205,7 +209,7 @@ void pha_subst(FILE* fr, FIELD* field, const int bin_ind){
 	ik=0;
 	for (i=1; i<= field->n_grid; ++i)
 		for (j=1; j <= field->n_grid; ++j){
-			if(bin_ind) {
+			if (bin_ind) {
 				if(fread (&b_in, sizeof(unsigned char), 1, fr) != 1){
 					fprintf(stderr,"Error reading portable bitmap\n");
 					return;
