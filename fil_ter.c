@@ -17,7 +17,7 @@ Function declaration
 void read_line(FILE* fr, char* line);
 double find_sum_smax(FILE *fr, FIELD* field, double *sum, const int bin_ind);
 
-void int_subst	(FIELD* field, const double* sum, const double smax);
+void int_subst	(FIELD* field, const double* sum, const double smax, const int no_header);
 void int_mult	(FIELD* field, const double* sum, const double smax);
 void pha_subst	(FILE* fr, FIELD* field, const int bin_ind);
 void pha_mult	(FILE* fr, FIELD* field, const int bin_ind);
@@ -33,10 +33,13 @@ __declspec(dllexport) void fil_ter(FIELD* field, const char* path, const char* c
 	/*Variable declaration*/
 	int bin_ind = 0;// FILE TYPE: P2 = 0; P5 = 1;
 	int imax, max_val;
+	int no_header = 0;
+
 	char *line;
 	FILE* fr;
 	double* sum;
 	double smax;
+
 	if (( fr = fopen(path,"rb")) == NULL) {
 		fprintf(stderr,"error opening file %s, exiting \n", path);
 		fflush(stderr);
@@ -57,15 +60,25 @@ __declspec(dllexport) void fil_ter(FIELD* field, const char* path, const char* c
 		bin_ind = 1;
 	}
 	else {
-		fprintf(stderr,"NOT PGM Format");
+		fprintf(stderr,"NOT PGM Format \n");
+		bin_ind = 0;
+		no_header = 1;
 	}
 
-	/* Read header */
-	read_line(fr, line);
+	if (no_header){
+		/* Re-open File to read straigth intensity*/
+		fprintf(stderr,"Re Openning file \n");
+		rewind(fr);
+		
+	}
+	else{
+		/* Read header */
+		read_line(fr, line);
 
-	/* Read dimension imax and max_val*/
-	fscanf(fr,"%d %d",&imax, &imax);
-	fscanf(fr,"%d",&max_val);
+		/* Read dimension imax and max_val*/
+		fscanf(fr,"%d %d",&imax, &imax);
+		fscanf(fr,"%d",&max_val);
+	}
 	/* Find sum and smax*/
 	sum  = (double *) calloc( (field->n_grid)*(field->n_grid), sizeof(double) );
 	if (sum == NULL) {
@@ -77,23 +90,28 @@ __declspec(dllexport) void fil_ter(FIELD* field, const char* path, const char* c
 	*/
 
 	if ((strstr(c1, "int"))!= NULL) {
-		smax = find_sum_smax(fr, field, sum, bin_ind);	
+		smax = find_sum_smax(fr, field, sum, bin_ind);
+		fprintf(stderr,"%f \n", smax);
 		if ((strstr(c2, "subst"))!=NULL){
 			/*  int subst here */
-			int_subst(field, sum, smax);
+			fprintf(stderr, "Intensity Subst");
+			int_subst(field, sum, smax, no_header);
 		}
 		else { 
 			/* int mult here */
+			fprintf(stderr, "Intensity Multiplication");
 			int_mult(field, sum, smax);
 		}
 	}
 	else if ((strstr(c1, "pha"))!= NULL) { 
 		if (strstr(c2, "subst")!=NULL){
 			/*  pha  subst here */
+			fprintf(stderr, "Phase Subst");
 			pha_subst(fr, field, bin_ind);
 		}
 		else { 
 			/* pha  mult here */
+			fprintf(stderr, "Phase Multiplication");
 			pha_mult(fr, field, bin_ind);
 		}
 	}
@@ -147,11 +165,14 @@ double find_sum_smax(FILE *fr, FIELD* field, double *sum, const int bin_ind){
 				}
 				sum[ik] = fi;
 			}
-			if(smax < sum[ik]) 
-				smax=sum[ik];
+
+			if (smax < sum[ik]) {
+				smax = sum[ik];
+			}
 			++ik;
 		}
 	}
+	smax = 1; // because argc != 5
 	return smax;
 }
 
@@ -159,7 +180,7 @@ double find_sum_smax(FILE *fr, FIELD* field, double *sum, const int bin_ind){
 * int subst helper function
 */
 
-void int_subst(FIELD* field, const double* sum, const double smax){
+void int_subst(FIELD* field, const double* sum, const double smax, const int no_header){
 	long ik;
 	double ssum, phi;
 	int i,j;
@@ -167,9 +188,9 @@ void int_subst(FIELD* field, const double* sum, const double smax){
 	ik=0;
 	for (i=1; i<= field->n_grid; ++i){
 		for (j=1; j <= field->n_grid; ++j){
-			ssum=sqrt(sum[ik]/smax);
+			ssum = sqrt(sum[ik]/smax);
 			phi=phase(field->imaginary[ik], field->real[ik]); 
-			field->real[ik]=ssum*cos(phi);
+			field->real[ik]		 = ssum*cos(phi);
 			field->imaginary[ik] = ssum*sin(phi);
 			ik++;
 		}
@@ -189,7 +210,6 @@ void int_mult(FIELD* field, const double* sum, const double smax){
 	for (i=1; i<= field->n_grid; ++i){
 		for (j=1; j <= field->n_grid; ++j){
 			ssum=sqrt(sum[ik]/smax);
-
 			field->real[ik] *= ssum;
 			field->imaginary[ik] *= ssum;
 			ik++;
@@ -200,7 +220,7 @@ void int_mult(FIELD* field, const double* sum, const double smax){
 /*
 pha subst helper function
 */
-void pha_subst(FILE* fr, FIELD* field, const int bin_ind){
+void pha_subst(FILE* fr, FIELD* field, const int bin_ind, const int normalized){
 	long ik;
 	double cab, sab, ccc, fi;
 	int i,j;
@@ -226,9 +246,10 @@ void pha_subst(FILE* fr, FIELD* field, const int bin_ind){
 			sab=sin(fi);
 			ccc=sqrt(field->real[ik]*field->real[ik]\
 				+field->imaginary[ik]*field->imaginary[ik]);
-			field->real[ik]= ccc*cab;
-			field->imaginary[ik] = ccc*sab;
-			ik ++;
+			
+			field->real[ik]		 = ccc*cab;
+			field->imaginary[ik] = ccc*sab;			
+			++ik;
 		}
 }
 

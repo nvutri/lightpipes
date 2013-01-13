@@ -46,5 +46,8 @@ __declspec(dllexport) void file_ps (FIELD* field );
 __declspec(dllexport) void file_pgm(FIELD* field, const char* path, double gamma, int max_val);
 __declspec(dllexport) void file_int(FIELD* field, const char* path, int number_of_points);
 __declspec(dllexport) void file_pha(FIELD* field, const char* path, int number_of_points, double level_of_intensity);
+__declspec(dllexport) void gauss(FIELD* field, double R, double xs, double ys, double AA );
+
+__declspec(dllexport) void freeField(FIELD* field);
 
 #endif // !_PIPES_H

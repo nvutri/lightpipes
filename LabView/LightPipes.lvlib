@@ -14,11 +14,22 @@
 		<Item Name="file_pgm_app.vi" Type="VI" URL="../file_pgm_app.vi"/>
 		<Item Name="filter_app.vi" Type="VI" URL="../filter_app.vi"/>
 		<Item Name="begin &amp;&amp; file_int.vi" Type="VI" URL="../begin &amp;&amp; file_int.vi"/>
+		<Item Name="file_pha app.vi" Type="VI" URL="../file_pha app.vi"/>
+		<Item Name="file_int app.vi" Type="VI" URL="../file_int app.vi"/>
+		<Item Name="begin gauss.vi" Type="VI" URL="../begin gauss.vi"/>
 	</Item>
 	<Item Name="Gergberg Saxton" Type="Folder">
 		<Item Name="get_path.vi" Type="VI" URL="../get_path.vi"/>
-		<Item Name="forvard - filter - file_pgm.vi" Type="VI" URL="../forvard - filter - file_pgm.vi"/>
+		<Item Name="forvard - filter.vi" Type="VI" URL="../forvard - filter.vi"/>
+		<Item Name="Gergberg Setup.vi" Type="VI" URL="../Gergberg Setup.vi"/>
+		<Item Name="filter - forvard .vi" Type="VI" URL="../filter - forvard .vi"/>
 		<Item Name="Gergberg Saxton.vi" Type="VI" URL="../Gergberg Saxton.vi"/>
+		<Item Name="Gergberg Loop.vi" Type="VI" URL="../Gergberg Loop.vi"/>
+		<Item Name="print phase pgm.vi" Type="VI" URL="../print phase pgm.vi"/>
+		<Item Name="matrix conversion.vi" Type="VI" URL="../matrix conversion.vi"/>
+		<Item Name="Intensity RMS.vi" Type="VI" URL="../Intensity RMS.vi"/>
+		<Item Name="Phase to Matrix.vi" Type="VI" URL="../Phase to Matrix.vi"/>
+		<Item Name="Gergberg v2.vi" Type="VI" URL="../Gergberg v2.vi"/>
 	</Item>
 	<Item Name="STD IO" Type="Folder">
 		<Item Name="Close output.vi" Type="VI" URL="../STD IO/stdout stderr/Close output.vi"/>
@@ -38,6 +49,9 @@
 	<Item Name="lens forvard.vi" Type="VI" URL="../VIs/lens forvard.vi"/>
 	<Item Name="Zer.vi" Type="VI" URL="../VIs/Zer.vi"/>
 	<Item Name="lens.vi" Type="VI" URL="../VIs/lens.vi"/>
-	<Item Name="LightPipes.dll" Type="Document" URL="../../../../Debug/LightPipes.dll"/>
 	<Item Name="file int.vi" Type="VI" URL="../VIs/file int.vi"/>
+	<Item Name="gauss.vi" Type="VI" URL="../VIs/gauss.vi"/>
+	<Item Name="matrix int.vi" Type="VI" URL="../VIs/matrix int.vi"/>
+	<Item Name="LightPipes.dll" Type="Document" URL="../../../../Debug/LightPipes.dll"/>
+	<Item Name="free Field.vi" Type="VI" URL="../VIs/free Field.vi"/>
 </Library>

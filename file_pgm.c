@@ -25,6 +25,7 @@ __declspec(dllexport) void file_pgm(FIELD* field, const char* path, double gamma
 	int imax;
 	long ik1;
 	float max_int=0;
+	float intensity;
 
 	//Open the file
 	if (( fr = fopen(path,"wb")) == NULL) {
@@ -79,7 +80,6 @@ __declspec(dllexport) void file_pgm(FIELD* field, const char* path, double gamma
 					}
 					sum=sum/(istep*istep);
 					i0=(int) floor(pow((sum/max_int),1./(gamma+0.0001))*max_val);
-					/* i0=(int)  (sum/max_int)*255;*/
 					fprintf(fr,"%d ", i0);
 					i_i++;
 					if (i_i == 40){
@@ -99,20 +99,15 @@ __declspec(dllexport) void file_pgm(FIELD* field, const char* path, double gamma
 					max_int=sum;
 			}
 		}
-		i_i=1;
 		for (i=1; i<= field->n_grid; i++ ){
 			for (j=1; j <= field->n_grid; j++ ){
 				double sum;
 				ik1=(i-1)*field->n_grid +j- 1;
-				sum = field->real[ik1] *field->real[ik1]+ field->imaginary[ik1] * (field->imaginary[ik1]);
+				sum = field->real[ik1] *field->real[ik1]+ field->imaginary[ik1] * field->imaginary[ik1];
 				i0=(int) floor(pow((sum/max_int),1./(gamma+0.00001))*max_val);
 				fprintf(fr,"%d ", i0);
-				i_i++;
-				if (i_i == 40){
-					fprintf(fr,"\n");
-					i_i=1;
-				}
 			}
+			fprintf(fr,"\n");
 		}
 	}
 	fclose(fr);
