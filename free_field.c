@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include "pipes.h"
 
-__declspec(dllexport) void freeField(FIELD* field){
+__declspec(dllexport) void free_field(FIELD* field){
 	free(field->imaginary);
 	free(field->real);	
 }

@@ -58,10 +58,12 @@ __declspec(dllexport) void file_int(FIELD* field, const char* path, int number_o
 		for (j=1; j <= field->n_grid; j += istep){ 
 			double sum;
 			sum = field->real[ik1]*field->real[ik1] + field->imaginary[ik1]*field->imaginary[ik1];
-			fprintf(fr, "%le ", sum );
+			if (j< field->n_grid)
+				fprintf(fr, "%le ", sum );
+			else
+				fprintf(fr, "%le\n", sum );
 			++ik1;
 		}
-		fprintf(fr, "\n");
 	}
 	//Close the file
 	fclose(fr);

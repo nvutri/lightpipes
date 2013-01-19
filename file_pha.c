@@ -70,9 +70,11 @@ __declspec(dllexport) void file_pha(FIELD* field, const char* path, int number_o
 					}
 				}
 				p_res = phase(im,re);
-				fprintf(fr,"%le ",p_res);
+				if (j< field->n_grid)
+					fprintf(fr, "%le ", p_res );
+				else
+					fprintf(fr, "%le\n", p_res);
 			}
-			fprintf(fr,"\n");
 		}
 	}
 	else { 
