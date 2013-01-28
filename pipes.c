@@ -5,6 +5,7 @@ Contains library functions
 #include "pipes.h"
 #include "fftn.h"
 #include <math.h>
+#include <stdlib.h>
 
 double phase(double y, double x){    
 	double pp=0.; 
@@ -21,8 +22,23 @@ double phase(double y, double x){
 }
 
 void fft3(FIELD* field, int ind){
-	int dims[2];
+	int *dims =  (int*) malloc (2*sizeof(int));
 	dims[0]=dims[1]=field->n_grid;
 	/* fprintf(stderr,"%d %d \n", dims[0], dims[1]); */
 	fftn(2, dims, field->real, field->imaginary, ind, (double) field->n_grid);
+	free( dims );
+}
+
+// Read file 1 line
+void read_line(FILE *fr, char *line){
+	int i;
+	const int MAX_LEN = 100;
+	char c_int;
+	i=0;
+	while((c_int=getc(fr)) != '\n') {
+		line[i]=c_int;
+		if(i<MAX_LEN){
+			++i;
+		}
+	}
 }

@@ -22,13 +22,13 @@ __declspec(dllexport) void file_pha(FIELD* field, const char* path, int number_o
 	int i,j,imax, istep, ii, jj;
 	double al, im, re, p_res;
 	long ik1;
-
+	const int _MAX_VAL = 255;
 	//Open files
 	if (( fr = fopen(path,"wb")) == NULL) {
 		fprintf(stderr,"error opening file %s, exiting \n", path);
 	}
 	//Default values
-	imax	=	64;
+	imax	=	field->n_grid;
 	al		=	0.01;
 	//Given values 
 	if (number_of_points != 0){
@@ -46,6 +46,16 @@ __declspec(dllexport) void file_pha(FIELD* field, const char* path, int number_o
 		istep	=	field->n_grid/imax;
 		imax	=	field->n_grid/istep;
 	}
+	/**
+	P2
+	#Creator: LightPipes (C) 1993-1996, Gleb Vdovin
+	256 256
+	255
+	*/
+	//fprintf(fr, "%s\n", "P2");
+	//fprintf(fr, "%s\n", "#Beam Phase Image");
+	//fprintf(fr, "%d %d\n", imax, imax);
+	//fprintf(fr, "255\n");
 
 	/* writing the phase    */
 	if(istep != 1){
@@ -60,20 +70,21 @@ __declspec(dllexport) void file_pha(FIELD* field, const char* path, int number_o
 					}
 				}
 				p_res = phase(im,re);
-				fprintf(fr,"%0.3f\n",p_res);
+				if (j< field->n_grid)
+					fprintf(fr, "%le ", p_res );
+				else
+					fprintf(fr, "%le\n", p_res);
 			}
-			fprintf(fr,"\n");
 		}
 	}
 	else { 
-		for (i=1; i<= field->n_grid; i+=istep){
-			for (j=1; j<= field->n_grid; j+=istep){
-				re	=	im  =  0.;
-				ik1	=	(i-1)*field->n_grid+j-1;
+		for (i=1; i<= field->n_grid; ++i){
+			for (j=1; j<= field->n_grid; ++j){				
+				ik1	=	(i-1) * (field->n_grid) + j - 1;
 				re	=	field->real[ik1];
 				im	=	field->imaginary[ik1];
-				p_res = phase(im, re);
-				fprintf(fr,"%0.3f\n", p_res);
+				p_res = phase(im, re) ;
+				fprintf(fr,"%le ", p_res);
 			}
 			fprintf(fr,"\n");
 		}
