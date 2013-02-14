@@ -38,4 +38,5 @@
 	<Item Name="matrix int.vi" Type="VI" URL="../VIs/matrix int.vi"/>
 	<Item Name="matrix pgm.vi" Type="VI" URL="../VIs/matrix pgm.vi"/>
 	<Item Name="matrix pha.vi" Type="VI" URL="../VIs/matrix pha.vi"/>
+	<Item Name="zern.vi" Type="VI" URL="../VIs/zern.vi"/>
 </Library>

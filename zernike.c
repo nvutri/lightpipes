@@ -10,10 +10,14 @@
 #include <stdlib.h>
 #include <math.h>
 
-double Zernike();
+double zernike(int n, int m, double rho, double phi);
 double factorial(int n);
-
-__declspec(dllexport) void Zer(FIELD* field, int n, int m, double R, double A){ 
+/* introduces arbitrary Zernike aberration into the field distribution
+USAGE:    n m R A, where  n and m  are the integer orders 
+see Born and Volf p. 465, sixth (corrected) edition, Pergamon, 1993,\n\
+R is the radius at which the phase amplitude reache
+*/
+__declspec(dllexport) void zern(FIELD* field, int n, int m, double R, double A){ 
 	int i,j,n2;
 	long ik;
 	double x, y, dx, fi, cab, sab, cc, cc1, rho, phi;
@@ -32,7 +36,7 @@ __declspec(dllexport) void Zer(FIELD* field, int n, int m, double R, double A){
 
 			phi=phase(y,x);
 
-			fi= A*Zernike(n,m,rho,phi);
+			fi= A*zernike(n,m,rho,phi);
 			cab=cos(fi);
 			sab=sin(fi);
 			cc=field->real[ik]*cab-field->imaginary[ik]*sab;
@@ -55,7 +59,7 @@ The implementation have not been optimized for speed.
 
 */
 
-double Zernike(int n, int m, double rho, double phi){
+double zernike(int n, int m, double rho, double phi){
 	int s, int_sign, mm, ncheck, ind;
 	double sum, product;
 	if(n<0){
@@ -114,8 +118,3 @@ double factorial(int n){
 
 /*****************************************************************/
 /*****************        END of Zernike     *********************/ 
-
-
-
-
-

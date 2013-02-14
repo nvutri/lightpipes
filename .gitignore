@@ -5,3 +5,12 @@ scripts
 *.obj
 *.llk
 *.exp
+#VS Project files
+VS*Project/*
+#No longer needed VIs
+STD*IO/*
+
+#No images and field profile
+*.png
+*.pgm
+*.dat
