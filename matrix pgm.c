@@ -8,10 +8,6 @@
 #include "pipes.h"
 #include <math.h>
 #include <stdio.h>
-#include <fcntl.h>
-#include <io.h>
-#include <tchar.h>
-#include <Windows.h>
 /*
 matrix pgm Put a matrix in to pgm file
 N: grid_size from *field
@@ -26,8 +22,8 @@ __declspec(dllexport) void matrix_pgm(const char *path, double matrix[], int gam
 	const int N = matrixSize;
 	const int max_val = 255;
 	//Initialization
-	gamma = gamma ? gamma : GAMMA;
-	normalize = normalize ? normalize : 0;
+	//gamma = gamma ? gamma : GAMMA;
+	//normalize = normalize ? normalize : 0;
 
 	//Open the file
 	if (( fr = fopen(path,"wb")) == NULL) {
@@ -42,6 +38,7 @@ __declspec(dllexport) void matrix_pgm(const char *path, double matrix[], int gam
 
 	//Normalization
 	if (normalize){
+		max_int = 0;
 		for (i=1; i<= N; i++){
 			for (j=1 ;j <= N; j++ ){
 				double sum;

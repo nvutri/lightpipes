@@ -10,6 +10,7 @@
 		<Item Name="forvard movie.vi" Type="VI" URL="../forvard movie.vi"/>
 		<Item Name="Gergberg Setup.vi" Type="VI" URL="../Gergberg Setup.vi"/>
 		<Item Name="Gergberg v2.vi" Type="VI" URL="../Gergberg v2.vi"/>
+		<Item Name="Gergberg v3.vi" Type="VI" URL="../Gergberg v3.vi"/>
 		<Item Name="get_path.vi" Type="VI" URL="../get_path.vi"/>
 		<Item Name="Matrix RMS.vi" Type="VI" URL="../Matrix RMS.vi"/>
 		<Item Name="matrix_filter - forvard.vi" Type="VI" URL="../matrix_filter - forvard.vi"/>
