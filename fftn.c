@@ -210,6 +210,7 @@ eg, something like -D__FILE__=\"fftn.c\"
 # define SIN72	0.95105651629515357	/* sin(72 deg) */
 #endif
 
+
 /* re-include this source file on the second pass through */
 #undef REAL
 #undef FFTN
@@ -223,7 +224,7 @@ eg, something like -D__FILE__=\"fftn.c\"
 # define FFTNS		"fftnf"		/* name for error message */
 # define FFTRADIX	fftradixf	/* trailing 'f' for float */
 # define FFTRADIXS	"fftradixf"	/* name for error message */
-# include __FILE__			/* include this file again */
+# include "fftn.c"			/* include this file again */
 #endif
 
 #undef REAL
@@ -238,7 +239,7 @@ eg, something like -D__FILE__=\"fftn.c\"
 # define FFTNS		"fftn"
 # define FFTRADIX	fftradix
 # define FFTRADIXS	"fftradix"
-# include __FILE__			/* include this file again */
+# include "fftn.c"		/* include this file again */
 #endif
 
 #define SUN_BROKEN_REALLOC /* for portability */
