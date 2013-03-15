@@ -5,6 +5,7 @@
 	<Property Name="NI.Lib.Version" Type="Str">1.0.0.0</Property>
 	<Item Name="Gerchberg Programs" Type="Folder">
 		<Item Name="forvard movie.vi" Type="VI" URL="../forvard movie.vi"/>
+		<Item Name="Gergberg Image Manipulation.vi" Type="VI" URL="../Gergberg Image Manipulation.vi"/>
 		<Item Name="Gergberg Main.vi" Type="VI" URL="../Gergberg Main.vi"/>
 		<Item Name="Gergberg v3.vi" Type="VI" URL="../Gergberg v3.vi"/>
 	</Item>
@@ -16,6 +17,26 @@
 		<Item Name="IMAQ Gerchberg Saxton.vi" Type="VI" URL="../IMAQ Gerchberg Saxton.vi"/>
 		<Item Name="IMAQ Interpolation.vi" Type="VI" URL="../IMAQ Interpolation.vi"/>
 		<Item Name="IMAQ Mask.vi" Type="VI" URL="../IMAQ Mask.vi"/>
+	</Item>
+	<Item Name="LightPipes modules" Type="Folder">
+		<Item Name="begin.vi" Type="VI" URL="../VIs/begin.vi"/>
+		<Item Name="circ ap.vi" Type="VI" URL="../VIs/circ ap.vi"/>
+		<Item Name="convert.vi" Type="VI" URL="../VIs/convert.vi"/>
+		<Item Name="fil ter matrix.vi" Type="VI" URL="../VIs/fil ter matrix.vi"/>
+		<Item Name="fil ter.vi" Type="VI" URL="../VIs/fil ter.vi"/>
+		<Item Name="file int.vi" Type="VI" URL="../VIs/file int.vi"/>
+		<Item Name="file pha.vi" Type="VI" URL="../VIs/file pha.vi"/>
+		<Item Name="file ps.vi" Type="VI" URL="../VIs/file ps.vi"/>
+		<Item Name="forvard.vi" Type="VI" URL="../VIs/forvard.vi"/>
+		<Item Name="free Field.vi" Type="VI" URL="../VIs/free Field.vi"/>
+		<Item Name="gauss.vi" Type="VI" URL="../VIs/gauss.vi"/>
+		<Item Name="image to matrix.vi" Type="VI" URL="../VIs/image to matrix.vi"/>
+		<Item Name="lens forvard.vi" Type="VI" URL="../VIs/lens forvard.vi"/>
+		<Item Name="lens.vi" Type="VI" URL="../VIs/lens.vi"/>
+		<Item Name="matrix int.vi" Type="VI" URL="../VIs/matrix int.vi"/>
+		<Item Name="matrix pgm.vi" Type="VI" URL="../VIs/matrix pgm.vi"/>
+		<Item Name="matrix pha.vi" Type="VI" URL="../VIs/matrix pha.vi"/>
+		<Item Name="zern.vi" Type="VI" URL="../VIs/zern.vi"/>
 	</Item>
 	<Item Name="Tests" Type="Folder">
 		<Item Name="file pgm.vi" Type="VI" URL="../VIs/file pgm.vi"/>
@@ -32,23 +53,5 @@
 		<Item Name="matrix_filter - forvard.vi" Type="VI" URL="../matrix_filter - forvard.vi"/>
 		<Item Name="Phase to Matrix.vi" Type="VI" URL="../Phase to Matrix.vi"/>
 	</Item>
-	<Item Name="begin.vi" Type="VI" URL="../VIs/begin.vi"/>
-	<Item Name="circ ap.vi" Type="VI" URL="../VIs/circ ap.vi"/>
-	<Item Name="convert.vi" Type="VI" URL="../VIs/convert.vi"/>
-	<Item Name="fil ter matrix.vi" Type="VI" URL="../VIs/fil ter matrix.vi"/>
-	<Item Name="fil ter.vi" Type="VI" URL="../VIs/fil ter.vi"/>
-	<Item Name="file int.vi" Type="VI" URL="../VIs/file int.vi"/>
-	<Item Name="file pha.vi" Type="VI" URL="../VIs/file pha.vi"/>
-	<Item Name="file ps.vi" Type="VI" URL="../VIs/file ps.vi"/>
-	<Item Name="forvard.vi" Type="VI" URL="../VIs/forvard.vi"/>
-	<Item Name="free Field.vi" Type="VI" URL="../VIs/free Field.vi"/>
-	<Item Name="gauss.vi" Type="VI" URL="../VIs/gauss.vi"/>
-	<Item Name="image to matrix.vi" Type="VI" URL="../VIs/image to matrix.vi"/>
-	<Item Name="lens forvard.vi" Type="VI" URL="../VIs/lens forvard.vi"/>
-	<Item Name="lens.vi" Type="VI" URL="../VIs/lens.vi"/>
 	<Item Name="Lightpipes.dll" Type="Document" URL="../Lightpipes.dll"/>
-	<Item Name="matrix int.vi" Type="VI" URL="../VIs/matrix int.vi"/>
-	<Item Name="matrix pgm.vi" Type="VI" URL="../VIs/matrix pgm.vi"/>
-	<Item Name="matrix pha.vi" Type="VI" URL="../VIs/matrix pha.vi"/>
-	<Item Name="zern.vi" Type="VI" URL="../VIs/zern.vi"/>
 </Library>
