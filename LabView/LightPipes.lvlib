@@ -8,6 +8,7 @@
 		<Item Name="Gergberg Image Manipulation.vi" Type="VI" URL="../Gergberg Image Manipulation.vi"/>
 		<Item Name="Gergberg Main.vi" Type="VI" URL="../Gergberg Main.vi"/>
 		<Item Name="Gergberg v3.vi" Type="VI" URL="../Gergberg v3.vi"/>
+		<Item Name="IMAQ forward movie.vi" Type="VI" URL="../IMAQ forward movie.vi"/>
 	</Item>
 	<Item Name="IMAQ Tools" Type="Folder">
 		<Property Name="NI.SortType" Type="Int">3</Property>
