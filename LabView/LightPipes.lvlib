@@ -6,9 +6,9 @@
 	<Item Name="Gerchberg Programs" Type="Folder">
 		<Item Name="forvard movie.vi" Type="VI" URL="../forvard movie.vi"/>
 		<Item Name="Gergberg Image Manipulation v2.vi" Type="VI" URL="../Gergberg Image Manipulation v2.vi"/>
-		<Item Name="Gergberg Image Manipulation.vi" Type="VI" URL="../Gergberg Image Manipulation.vi"/>
 		<Item Name="Gergberg Main.vi" Type="VI" URL="../Gergberg Main.vi"/>
 		<Item Name="Gergberg v3.vi" Type="VI" URL="../Gergberg v3.vi"/>
+		<Item Name="Gergberg v4.vi" Type="VI" URL="../Gergberg v4.vi"/>
 		<Item Name="IMAQ forward movie.vi" Type="VI" URL="../IMAQ forward movie.vi"/>
 	</Item>
 	<Item Name="IMAQ Tools" Type="Folder">
@@ -20,6 +20,7 @@
 		<Item Name="IMAQ Interpolation.vi" Type="VI" URL="../IMAQ Interpolation.vi"/>
 		<Item Name="IMAQ Mask.vi" Type="VI" URL="../IMAQ Mask.vi"/>
 		<Item Name="IMAQ Resample ROI.vi" Type="VI" URL="../IMAQ Resample ROI.vi"/>
+		<Item Name="IMAQ Gerchberg Iteration.vi" Type="VI" URL="../IMAQ Gerchberg Iteration.vi"/>
 	</Item>
 	<Item Name="LightPipes modules" Type="Folder">
 		<Item Name="begin.vi" Type="VI" URL="../VIs/begin.vi"/>
