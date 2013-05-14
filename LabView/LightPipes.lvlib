@@ -4,19 +4,18 @@
 	<Property Name="NI.Lib.SourceVersion" Type="Int">302022660</Property>
 	<Property Name="NI.Lib.Version" Type="Str">1.0.0.0</Property>
 	<Item Name="Gerchberg Programs" Type="Folder">
-		<Item Name="forvard movie.vi" Type="VI" URL="../forvard movie.vi"/>
-		<Item Name="Gergberg Image Manipulation v2.vi" Type="VI" URL="../Gergberg Image Manipulation v2.vi"/>
-		<Item Name="Gergberg Main.vi" Type="VI" URL="../Gergberg Main.vi"/>
-		<Item Name="Gergberg v3.vi" Type="VI" URL="../Gergberg v3.vi"/>
-		<Item Name="Gergberg v4.vi" Type="VI" URL="../Gergberg v4.vi"/>
-		<Item Name="IMAQ forward movie.vi" Type="VI" URL="../IMAQ forward movie.vi"/>
+		<Item Name="Forward Movie BlackWhite.vi" Type="VI" URL="../Forward Movie BlackWhite.vi"/>
+		<Item Name="Gergberg BlackWhite.vi" Type="VI" URL="../Gergberg BlackWhite.vi"/>
+		<Item Name="Gergberg Color.vi" Type="VI" URL="../Gergberg Color.vi"/>
+		<Item Name="Gergberg Image Manipulation.vi" Type="VI" URL="../Gergberg Image Manipulation.vi"/>
+		<Item Name="IMAQ noise remove.vi" Type="VI" URL="../IMAQ noise remove.vi"/>
 	</Item>
 	<Item Name="IMAQ Tools" Type="Folder">
 		<Property Name="NI.SortType" Type="Int">3</Property>
+		<Item Name="IMAQ forward movie.vi" Type="VI" URL="../IMAQ forward movie.vi"/>
 		<Item Name="IMAQ sum.vi" Type="VI" URL="../IMAQ sum.vi"/>
-		<Item Name="IMAQ balance energy.vi" Type="VI" URL="../IMAQ balance energy.vi"/>
 		<Item Name="IMAQ crop image.vi" Type="VI" URL="../IMAQ crop image.vi"/>
-		<Item Name="IMAQ Gerchberg Saxton.vi" Type="VI" URL="../IMAQ Gerchberg Saxton.vi"/>
+		<Item Name="IMAQ balance energy.vi" Type="VI" URL="../IMAQ balance energy.vi"/>
 		<Item Name="IMAQ Interpolation.vi" Type="VI" URL="../IMAQ Interpolation.vi"/>
 		<Item Name="IMAQ Mask.vi" Type="VI" URL="../IMAQ Mask.vi"/>
 		<Item Name="IMAQ Resample ROI.vi" Type="VI" URL="../IMAQ Resample ROI.vi"/>
@@ -43,6 +42,7 @@
 		<Item Name="zern.vi" Type="VI" URL="../VIs/zern.vi"/>
 	</Item>
 	<Item Name="Tests" Type="Folder">
+		<Item Name="FFT test.vi" Type="VI" URL="../FFT test.vi"/>
 		<Item Name="file pgm.vi" Type="VI" URL="../VIs/file pgm.vi"/>
 		<Item Name="test matrix_int.vi" Type="VI" URL="../test matrix_int.vi"/>
 		<Item Name="test zernike.vi" Type="VI" URL="../test zernike.vi"/>
